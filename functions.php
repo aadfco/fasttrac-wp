@@ -44,9 +44,10 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
-		// This theme uses wp_nav_menu() in one location.
+		// This theme uses wp_nav_menu() in one location and uses a secondary menu.
 		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'fasttrac' ),
+			'primary-menu' => esc_html__( 'Primary', 'fasttrac' ),
+			'secondary-menu' => esc_html__('Secondary', 'fasttrac'),
 		) );
 
 		/*
@@ -60,6 +61,21 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 			'gallery',
 			'caption',
 		) );
+
+		/**
+			* Enable support for Post Thumbnails on posts and pages.
+			*
+			* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+			*/
+			add_theme_support( 'post-thumbnails' );
+
+			add_image_size( 'small', 320, 9999 );
+			add_image_size( 'medium', 640, 9999 );
+			add_image_size( 'large', 1024, 9999 );
+			add_image_size( 'xlarge', 1200, 9999 );
+			add_image_size( 'xxl', 1600, 9999 );
+			add_image_size( 'huge', 2000, 9999 );
+
 
 		// Set up the WordPress core custom background feature.
 		add_theme_support( 'custom-background', apply_filters( 'fasttrac_custom_background_args', array(
@@ -84,6 +100,22 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 	}
 endif;
 add_action( 'after_setup_theme', 'fasttrac_setup' );
+
+/**
+	* Add image sizes to Media Dialog
+	*
+	*/
+	add_filter( 'image_size_names_choose', 'fasttrac_custom_sizes' );
+
+	function fasttrac_custom_sizes( $sizes ) {
+		return array_merge( $sizes, array(
+			'small' => __('Small'),
+			'medium' => __('Medium'),
+			'large' => __('Large'),
+			'xlarge' => __('XLarge'),
+
+		));
+	}
 
 /**
 * Disable default error login message
@@ -117,6 +149,14 @@ return 'Fast Trac';
 add_filter( 'login_headertitle', 'my_login_logo_url_title' );
 
 /**
+ * Enable ACF Options Page
+ *
+ */
+ if( function_exists('acf_add_options_page') ) {
+ 	acf_add_options_page();
+ }
+
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
@@ -146,6 +186,42 @@ function fasttrac_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+	register_sidebar( array(
+		'name' 							=> esc_html__( 'Fast Points Footer Widget Links', 'fasttrac' ),
+		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
+		'id'								=> 'fastpoints-footer-widget-links',
+		'before_widget'			=> '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'			=> '</aside>',
+		'before_title'			=> '<h5>',
+		'after_title'				=> '</h5>',
+	) );
+	register_sidebar( array(
+		'name' 							=> esc_html__( 'Locations Footer Widget Links', 'fasttrac' ),
+		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
+		'id'								=> 'locations-footer-widget-links',
+		'before_widget'			=> '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'			=> '</aside>',
+		'before_title'			=> '<h5>',
+		'after_title'				=> '</h5>',
+	) );
+	register_sidebar( array(
+		'name' 							=> esc_html__( 'About Footer Widget Links', 'fasttrac' ),
+		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
+		'id'								=> 'about-footer-widget-links',
+		'before_widget'			=> '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'			=> '</aside>',
+		'before_title'			=> '<h5>',
+		'after_title'				=> '</h5>',
+	) );
+	register_sidebar( array(
+		'name' 							=> esc_html__( 'Legal Footer Widget Links', 'fasttrac' ),
+		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
+		'id'								=> 'legal-footer-widget-links',
+		'before_widget'			=> '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'			=> '</aside>',
+		'before_title'			=> '<h5>',
+		'after_title'				=> '</h5>',
+	) );
 }
 add_action( 'widgets_init', 'fasttrac_widgets_init' );
 
@@ -153,9 +229,17 @@ add_action( 'widgets_init', 'fasttrac_widgets_init' );
  * Enqueue scripts and styles.
  */
 function fasttrac_scripts() {
-	wp_enqueue_style( 'fasttrac-style', get_stylesheet_uri() );
+	// wp_enqueue_style( 'fasttrac-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'fasttrac-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_enqueue_style( 'fasttrac-style', get_template_directory_uri() . '/css/app.css' );
+
+	wp_enqueue_script( 'fasttrac-what-input', get_template_directory_uri() . '/js/what-input.min.js', array('jquery'), '20151215', true );
+
+	wp_enqueue_script( 'fasttrac-foundation', get_template_directory_uri() . '/js/foundation.min.js', array('jquery'), '20151215', true );
+
+	wp_enqueue_script( 'fasttrac-wow', get_template_directory_uri() . '/js/wow.min.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'fasttrac-app-js', get_template_directory_uri() . '/js/app.js', array('jquery'), '20151215', true );
 
 	wp_enqueue_script( 'fasttrac-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
