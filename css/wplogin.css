@@ -1,0 +1,49 @@
+/************ WordPress Login Screen ***********/
+body{
+  background: #fff;
+  color: #000
+}
+
+a{
+  color: #f01614
+}
+
+.login h1 a{
+  background-image: url('../img/fasttrac-logo-2.svg');
+  background-size: 250px 150px;
+  width: 100%;
+  min-height: 150px;
+}
+
+
+.login form{
+  box-shadow: 2px 4px 15px 5px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.10);
+  background: #efefef;
+}
+
+
+.wp-core-ui .button-primary{
+  background: #e31b23;
+  border-color: transparent;
+  border-width: 0;
+  border-radius: 0;
+  border-style: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.wp-core-ui .button-primary.focus, .wp-core-ui .button-primary.hover, .wp-core-ui .button-primary:focus, .wp-core-ui .button-primary:hover{
+  background: #e31b23;
+  border-color: transparent;
+}
+
+input[type=text]:focus, input[type=search]:focus, input[type=radio]:focus, input[type=tel]:focus, input[type=time]:focus, input[type=url]:focus, input[type=week]:focus, input[type=password]:focus, input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=email]:focus, input[type=month]:focus, input[type=number]:focus, select:focus, textarea:focus{
+  border-color: #e31b23;
+  box-shadow: 0 0 2px rgba(240,22,20,.8);
+}
+
+
+.login #login_error, .login .message{
+  border-color: #cc1413;
+}
