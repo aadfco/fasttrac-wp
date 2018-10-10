@@ -157,6 +157,30 @@ add_filter( 'login_headertitle', 'my_login_logo_url_title' );
  }
 
 /**
+* Enable custom templates for WP Store Locator
+*
+*/
+add_filter( 'wpsl_templates', 'custom_templates' );
+
+function custom_templates( $templates ) {
+
+    /**
+     * The 'id' is for internal use and must be unique ( since 2.0 ).
+     * The 'name' is used in the template dropdown on the settings page.
+     * The 'path' points to the location of the custom template,
+     * in this case the folder of your active theme.
+     */
+    $templates[] = array (
+        'id'   => 'custom',
+        'name' => 'Custom template',
+        'path' => get_stylesheet_directory() . '/' . 'wpsl-templates/wpsl-custom.php',
+    );
+
+    return $templates;
+}
+
+
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
