@@ -8,51 +8,135 @@
  *
  * @package Fast_Trac
  */
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="mask-icon" href="safari-pinned-tab.svg" color="#e31b23">
+  <meta name="apple-mobile-web-app-title" content="Fast Trac">
+  <meta name="application-name" content="Fast Trac">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#373737">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
 	<?php wp_head(); ?>
 </head>
-
 <body <?php body_class(); ?>>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'fasttrac' ); ?></a>
+	<header class="navigation">
+      <div class="top-nav">
+        <div class="container">
+          <div class="inner-row">
+            <div class="top-social">
+              <ul class="menu">
+								<?php if( have_rows('social_media_icons','option') ): ?>
+									<?php while( have_rows('social_media_icons','option') ): the_row();
+										// ACF Repeater Variables
+										$social_media_link = get_sub_field('social_media_link', 'option');
+										$social_media_icon = get_sub_field('social_media_icon', 'option');
+										?>
+											<li>
+												<a href="<?php echo $social_media_link; ?>" class="<?php echo $social_media_icon; ?>"></a>
+											</li>
+									<?php endwhile; ?>
+								<?php endif; ?>
+              </ul>
+            </div>
+            <nav class="secondary-menu" role="navigation">
+							<?php
+								wp_nav_menu( array(
+									'theme_location' => 'secondary-menu',
+									'menu_id'        => 'secondary-menu',
+									'menu_class'		 => 'menu',
+									'container'			 => 'ul'
+								) );
+							?>
+            </nav>
+          </div>
+        </div>
+      </div><!-- end top-nav -->
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$fasttrac_description = get_bloginfo( 'description', 'display' );
-			if ( $fasttrac_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $fasttrac_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+      <!-- Begin Main Nav -->
+      <div class="main-nav">
+        <div class="container">
+          <div class="inner-row align-justify align-middle">
+            <div class="logo animated fadeInLeftBig slow">
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'fasttrac' ); ?></button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+							<?php
+							the_custom_logo();
+							if ( is_front_page() && is_home() ) :
+							?>
+							<?php endif; ?>
+            </div>
 
-	<div id="content" class="site-content">
+            <nav class="mobile-menu hide-for-large" role="navigation">
+              <div class="mobile-btn-wrap">
+                <button class="hamburger hamburger--elastic" type="button" data-toggle="mobile-menu-overlay">
+                  <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                  </span>
+                </button>
+              </div>
+              <div class="mobile-menu-overlay transition-duration-300ms" role="navigation" id="mobile-menu-overlay" data-toggler data-animate="hinge-in-from-top hinge-out-from-top">
+								<?php
+									wp_nav_menu( array(
+										'theme_location' => 'primary-menu',
+										'menu_id'        => 'primary-menu',
+										'menu_class'		 => 'primary-mobile-menu',
+										'container'			 => 'ul'
+									) );
+								?>
+								<?php
+									wp_nav_menu( array(
+										'theme_location' => 'secondary-menu',
+										'menu_id'        => 'secondary-menu',
+										'menu_class'		 => 'secondary-mobile-menu',
+										'container'			 => 'ul'
+									) );
+								?>
+              </div>
+            </nav>
+
+            <!-- Begin Desktop Navigation Menus -->
+            <nav class="primary-menu animated fadeInRightBig slow">
+							<?php
+								wp_nav_menu( array(
+									'theme_location' => 'primary-menu',
+									'menu_id'        => 'primary-menu',
+									'menu_class'		 => 'menu',
+									'container'			 => 'ul'
+								) );
+							?>
+            </nav>
+
+            <div class="fp-login animated fadeInRightBig slow">
+							<?php
+							// ACF Fast Points Logo Variables
+							$fp_logo = get_field('fast_points_logo', 'option');
+							$fp_logo_link = get_field('fast_points_link', 'option')
+							?>
+              <div class="fp-logo">
+                <a href="<?php echo $fp_logo_link; ?>">
+									<?php
+										if( !empty($fp_logo) ): ?>
+											<img src="<?php echo $fp_logo['url']; ?>" alt="<?php echo $fp_logo['alt']; ?>" />
+									<?php endif; ?>
+                  <span class="fp-login-link">Login | Sign Up</span>
+                </a>
+              </div>
+            </div>
+
+          </div> <!-- end inner-row -->
+        </div> <!-- end container -->
+      </div> <!-- end main-nav -->
+    </header> <!-- end navigation -->
+
+
+
+	<!-- <div id="content" class="site-content"> -->
