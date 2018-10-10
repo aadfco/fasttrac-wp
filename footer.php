@@ -11,24 +11,67 @@
 
 ?>
 
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'fasttrac' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'fasttrac' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'fasttrac' ), 'fasttrac', '<a href="https://aadf.co">Alejandro-Alton D Franco</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+	<!-- </div> end content -->
+	<footer>
+    <div class="main-footer">
+      <div class="container">
+        <div class="inner-row">
+          <div class="footer-widget-cell">
+						<?php if(is_active_sidebar('fastpoints-footer-widget-links')){
+		          dynamic_sidebar( 'fastpoints-footer-widget-links' );
+			        }
+		        ?>
+          </div>
+					<div class="footer-widget-cell">
+						<?php if(is_active_sidebar('locations-footer-widget-links')){
+		          dynamic_sidebar( 'locations-footer-widget-links' );
+			        }
+		        ?>
+          </div>
+					<div class="footer-widget-cell">
+						<?php if(is_active_sidebar('about-footer-widget-links')){
+		          dynamic_sidebar( 'about-footer-widget-links' );
+			        }
+		        ?>
+          </div>
+					<div class="footer-widget-cell">
+						<?php if(is_active_sidebar('legal-footer-widget-links')){
+		          dynamic_sidebar( 'legal-footer-widget-links' );
+			        }
+		        ?>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-footer">
+      <div class="container">
+        <div class="inner-row bottom-footer-align">
+          <div class="bf-copyright">
+            <p>&copy; <?php
+						/* translators: %s: CMS name, i.e. WordPress. */
+						echo date("Y");
+						printf( esc_html__( ' Fast Trac. %s', 'fasttrac' ), 'All rights reserved.' );
+						?>
+          </div>
+          <div class="bf-social">
+						<ul class="menu">
+							<?php if( have_rows('social_media_icons','option') ): ?>
+								<?php while( have_rows('social_media_icons','option') ): the_row();
+									// ACF Repeater Vars
+									$social_media_link = get_sub_field('social_media_link', 'option');
+									$social_media_icon = get_sub_field('social_media_icon', 'option');
+									?>
+										<li>
+											<a href="<?php echo $social_media_link; ?>" class="<?php echo $social_media_icon; ?>"></a>
+										</li>
+								<?php endwhile; ?>
+							<?php endif; ?>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 <?php wp_footer(); ?>
 
