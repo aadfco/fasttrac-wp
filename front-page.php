@@ -124,27 +124,43 @@ $sl_shortcode = get_field('store_locator_shortcode');
           <p><?php echo $sl_p; ?></p>
         </div>
       </div>
-
-          <?php echo $sl_shortcode; ?>
-
+      <div class="inner-row align-center wow animated fadeIn animation-delay-300ms">
+        <div class="store-locator-form">
+          <?php if(is_active_sidebar('store-locator-homepage-widget')){
+            dynamic_sidebar( 'store-locator-homepage-widget' );
+            }
+          ?>
+        </div>
+      </div>
     </div>
   </section>
 
 <!-- Begin Careers -->
+<?php
+// ACF Careers Variables
+$careers_heading = get_field('careers_heading');
+$careers_p = get_field('careers_paragraph');
+$careers_img = get_field('careers_img');
+$careers_btn = get_field('careers_btn');
+$link = $careers_btn['link'];
+$text = $careers_btn['text'];
+?>
   <section class="careers-home">
     <div class="container">
       <div class="inner-row">
         <div class="section-title">
-          <h1 class="standard-shadow wow animated lightSpeedIn">join the team</h1>
+          <h1 class="standard-shadow wow animated lightSpeedIn"><?php echo $careers_heading; ?></h1>
         </div>
       </div>
       <div class="inner-row">
         <div class="section-content small-order-2 medium-order-1 wow animated slideInLeft animation-delay-300ms">
-          <p>Many of our long-term, seasoned employees began their careers right here. From your first day, you’ll discover why so many have chosen to build their career at Fast Trac.</p>
-          <a href="./careers.php" class="button">browse careers</a>
+          <p><?php echo $careers_p; ?></p>
+          <?php if( $careers_btn ) :?>
+          <a href="<?php echo $link; ?>" class="button"><?php echo $text; ?></a>
+          <?php endif; ?>
         </div>
         <div class="employee-cutout small-order-1 medium-order-2 wow animated slideInRight animation-delay-300ms">
-          <img src="<?php echo get_template_directory_uri(); ?>/img/employee-cut.png" alt="">
+          <?php echo wp_get_attachment_image($careers_img, 'full', false, array()); ?>
         </div>
       </div>
     </div>
