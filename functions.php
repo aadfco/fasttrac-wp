@@ -246,6 +246,16 @@ function fasttrac_widgets_init() {
 		'before_title'			=> '<h5>',
 		'after_title'				=> '</h5>',
 	) );
+	register_sidebar( array(
+		'name' 							=> esc_html__( 'Store Locator Homepage Widget', 'fasttrac' ),
+		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
+		'id'								=> 'store-locator-homepage-widget',
+		'before_widget'			=> '<div="%1$s" class="widget %2$s wpsl-widget">',
+		'after_widget'			=> '</div>',
+		'before_title'			=> '<h5>',
+		'after_title'				=> '</h5>',
+	) );
+
 }
 add_action( 'widgets_init', 'fasttrac_widgets_init' );
 
@@ -254,6 +264,9 @@ add_action( 'widgets_init', 'fasttrac_widgets_init' );
  */
 function fasttrac_scripts() {
 	// wp_enqueue_style( 'fasttrac-style', get_stylesheet_uri() );
+
+
+  wp_dequeue_style( 'wpsl-styles' );
 
 	wp_enqueue_style( 'fasttrac-style', get_template_directory_uri() . '/css/app.css' );
 
@@ -272,6 +285,13 @@ function fasttrac_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fasttrac_scripts' );
+
+
+/**
+ * Disable auto-formatting shortcodes
+ */
+remove_filter('the_content', 'wpautop');
+add_filter('the_content', 'wpautop', 99);
 
 /**
  * Implement the Custom Header feature.
