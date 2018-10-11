@@ -31,7 +31,7 @@
 <body <?php body_class(); ?>>
 	<header class="navigation">
       <div class="top-nav">
-        <div class="container">
+        <div class="fluid-container">
           <div class="inner-row">
             <div class="top-social">
               <ul class="menu">
@@ -64,7 +64,7 @@
 
       <!-- Begin Main Nav -->
       <div class="main-nav">
-        <div class="container">
+        <div class="fluid-container">
           <div class="inner-row align-justify align-middle">
             <div class="logo animated fadeInLeftBig slow">
 
