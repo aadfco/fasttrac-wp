@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="bottom-footer">
-      <div class="container">
+      <div class="full-container">
         <div class="inner-row bottom-footer-align">
           <div class="bf-copyright">
             <p>&copy; <?php
