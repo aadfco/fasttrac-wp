@@ -70,8 +70,8 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 			add_theme_support( 'post-thumbnails' );
 
 			add_image_size( 'small', 320, 9999 );
-			add_image_size( 'medium', 640, 9999 );
-			add_image_size( 'large', 1024, 9999 );
+			add_image_size('small-square', 320, 320, true);
+			add_image_size( 'medium-square', 640, 640, true );
 			add_image_size( 'xlarge', 1200, 9999 );
 			add_image_size( 'xxl', 1600, 9999 );
 			add_image_size( 'huge', 2000, 9999 );
@@ -260,6 +260,31 @@ function fasttrac_widgets_init() {
 add_action( 'widgets_init', 'fasttrac_widgets_init' );
 
 /**
+ * Register New Formats for TinyMCE
+ *
+ *
+ */
+function my_tinymce_styles( $init_array ) {
+
+    $style_formats = array(
+        // These are the custom styles
+        array(
+            'title' => 'Underlined Heading',
+            'block' => 'h4',
+            'classes' => 'heading-underlined',
+            'wrapper' => false,
+        ),  
+    );
+    // Insert the array, JSON ENCODED, into 'style_formats'
+    $init_array['style_formats'] = json_encode( $style_formats );
+
+    return $init_array;
+
+}
+// Attach callback to 'tiny_mce_before_init'
+add_filter( 'tiny_mce_before_init', 'my_tinymce_styles' );
+
+/**
  * Enqueue scripts and styles.
  */
 function fasttrac_scripts() {
@@ -290,8 +315,8 @@ add_action( 'wp_enqueue_scripts', 'fasttrac_scripts' );
 /**
  * Disable auto-formatting shortcodes
  */
-remove_filter('the_content', 'wpautop');
-add_filter('the_content', 'wpautop', 99);
+// remove_filter('the_content', 'wpautop');
+// add_filter('the_content', 'wpautop', 9999);
 
 /**
  * Implement the Custom Header feature.
