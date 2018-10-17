@@ -15,15 +15,15 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="mask-icon" href="safari-pinned-tab.svg" color="#e31b23">
-  <meta name="apple-mobile-web-app-title" content="Fast Trac">
-  <meta name="application-name" content="Fast Trac">
-  <meta name="msapplication-TileColor" content="#ffc40d">
-  <meta name="theme-color" content="#373737">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>/favicon-16x16.png">
+	<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/site.webmanifest">
+	<link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/safari-pinned-tab.svg" color="#ed1c24">
+	<meta name="apple-mobile-web-app-title" content="Fast Trac">
+	<meta name="application-name" content="Fast Trac">
+	<meta name="msapplication-TileColor" content="#ed1c24">
+	<meta name="theme-color" content="#ffffff">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
 	<?php wp_head(); ?>
@@ -31,7 +31,7 @@
 <body <?php body_class(); ?>>
 	<header class="navigation">
       <div class="top-nav">
-        <div class="fluid-container">
+        <div class="full-container">
           <div class="inner-row">
             <div class="top-social">
               <ul class="menu">
@@ -64,7 +64,7 @@
 
       <!-- Begin Main Nav -->
       <div class="main-nav">
-        <div class="fluid-container">
+        <div class="full-container">
           <div class="inner-row align-justify align-middle">
             <div class="logo animated fadeInLeftBig slow">
 
@@ -136,7 +136,3 @@
         </div> <!-- end container -->
       </div> <!-- end main-nav -->
     </header> <!-- end navigation -->
-
-
-
-	<!-- <div id="content" class="site-content"> -->
