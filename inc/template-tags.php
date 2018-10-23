@@ -51,6 +51,15 @@ if ( ! function_exists( 'fasttrac_posted_by' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'fasttrac_post_author' ) ) :
+	/**
+	 * Prints HTML with meta information for the current author.
+	 */
+	function fasttrac_post_author() {
+		the_post(); echo get_the_author(); rewind_posts();
+	}
+endif;
+
 if ( ! function_exists( 'fasttrac_entry_footer' ) ) :
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
