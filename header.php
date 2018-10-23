@@ -32,7 +32,7 @@
 	<header class="navigation">
       <div class="top-nav">
         <div class="full-container">
-          <div class="inner-row">
+          <div class="inner-row align-justify">
             <div class="top-social">
               <ul class="menu">
 								<?php if( have_rows('social_media_icons','option') ): ?>
@@ -66,7 +66,7 @@
       <div class="main-nav">
         <div class="full-container">
           <div class="inner-row align-justify align-middle">
-            <div class="logo animated fadeInLeftBig slow">
+            <div class="logo animated">
 
 							<?php
 							the_custom_logo();
@@ -76,7 +76,7 @@
             </div>
 
             <nav class="mobile-menu hide-for-large" role="navigation">
-              <div class="mobile-btn-wrap">
+              <div class="mobile-btn-wrap animated">
                 <button class="hamburger hamburger--elastic" type="button" data-toggle="mobile-menu-overlay">
                   <span class="hamburger-box">
                     <span class="hamburger-inner"></span>
@@ -104,7 +104,7 @@
             </nav>
 
             <!-- Begin Desktop Navigation Menus -->
-            <nav class="primary-menu animated fadeInRightBig slow">
+            <nav class="primary-menu animated">
 							<?php
 								wp_nav_menu( array(
 									'theme_location' => 'primary-menu',
@@ -115,7 +115,7 @@
 							?>
             </nav>
 
-            <div class="fp-login animated fadeInRightBig slow">
+            <div class="fp-login animated">
 							<?php
 							// ACF Fast Points Logo Variables
 							$fp_logo = get_field('fast_points_logo', 'option');
