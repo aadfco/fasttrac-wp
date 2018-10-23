@@ -137,7 +137,6 @@ add_filter( 'login_errors', 'no_wordpress_errors' );
 /**
 * Change URL for Logo on Login Screen
 */
-
 function my_login_logo_url() {
 return get_bloginfo( 'url' );
 }
@@ -155,6 +154,36 @@ add_filter( 'login_headertitle', 'my_login_logo_url_title' );
  if( function_exists('acf_add_options_page') ) {
  	acf_add_options_page();
  }
+
+ /**
+ * Careers Custom Post Type
+ * @link https://codex.wordpress.org/Post_Types
+ */
+ // function create_post_type() {
+ //   register_post_type( 'careers',
+ //     array(
+ //       'labels' => array(
+ //         'name' => __( 'Careers' ),
+ //         'singular_name' => __( 'Career' )
+ //       ),
+ //       'public' => true,
+ //       'has_archive' => true,
+ //     )
+ //   );
+ // }
+ // add_action( 'init', 'create_post_type' );
+
+ add_action('admin_head', 'acf_table_styles');
+
+function acf_table_styles() {
+  echo '<style>
+    .acf-table-header-cont,
+    .acf-table-body-cont {
+        white-space: pre-line;
+    }
+  </style>';
+}
+
 
 /**
 * Enable custom templates for WP Store Locator
@@ -194,6 +223,58 @@ function fasttrac_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'fasttrac_content_width', 640 );
 }
 add_action( 'after_setup_theme', 'fasttrac_content_width', 0 );
+
+
+/**
+ * Custom Paginate Links
+ *
+ * @link https://codex.wordpress.org/Function_Reference/paginate_links
+ */
+ function pagination($pages = '', $range = 4) {
+  $showitems = ($range * 2)+1;
+
+  global $paged;
+  if(empty($paged)) $paged = 1;
+
+  if($pages == '') {
+      global $wp_query;
+      $pages = $wp_query->max_num_pages;
+      if(!$pages) {
+          $pages = 1;
+      }
+  }
+
+  if(1 != $pages) {
+      echo "<nav aria-label=\"Pagination\"><h5>Page ".$paged." of ".$pages."</h5>\n";
+			echo "<ul class=\"pagination text-center\">\n";
+      if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<li><a href='".get_pagenum_link(1)."'>&laquo; First</a></li>";
+      if($paged > 1 && $showitems < $pages) echo "<li class=\"pagination-prevous\"><a href='".get_pagenum_link($paged - 1)."'>&lsaquo; Previous</a></li>";
+
+      for ($i=1; $i <= $pages; $i++) {
+          if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )) {
+              echo ($paged == $i)? "<li class=\"current\">".$i."</li>":"<li><a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a></li>";
+          }
+      }
+
+      if ($paged < $pages && $showitems < $pages) echo "<li><a href=\"".get_pagenum_link($paged + 1)."\">Next &rsaquo;</a></li>";
+      if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<li><a href='".get_pagenum_link($pages)."'>Last &raquo;</a></li>";
+      echo "</ul>\n";
+			echo "</nav>\n";
+  }
+ }
+
+/**
+ * Wrap YouTube Embeds in responsive divs.
+ *
+ */
+function dcwd_youtube_wrapper( $html, $url, $attr, $post_ID ) {
+	$classes[] = 'responsive-embed widescreen';
+    if (stripos($url, "youtube.com/") !== FALSE || stripos($url, "youtu.be/") !== FALSE) {
+		$classes[] = 'video-container';
+    }
+    return '<div class="' . implode( ' ', $classes ) . '">' . $html . '</div>';
+}
+add_filter( 'embed_oembed_html', 'dcwd_youtube_wrapper', 10, 4 );
 
 /**
  * Register widget area.
@@ -273,7 +354,7 @@ function my_tinymce_styles( $init_array ) {
             'block' => 'h4',
             'classes' => 'heading-underlined',
             'wrapper' => false,
-        ),  
+        ),
     );
     // Insert the array, JSON ENCODED, into 'style_formats'
     $init_array['style_formats'] = json_encode( $style_formats );
@@ -288,9 +369,6 @@ add_filter( 'tiny_mce_before_init', 'my_tinymce_styles' );
  * Enqueue scripts and styles.
  */
 function fasttrac_scripts() {
-	// wp_enqueue_style( 'fasttrac-style', get_stylesheet_uri() );
-
-
   wp_dequeue_style( 'wpsl-styles' );
 
 	wp_enqueue_style( 'fasttrac-style', get_template_directory_uri() . '/css/app.css' );
@@ -310,13 +388,6 @@ function fasttrac_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fasttrac_scripts' );
-
-
-/**
- * Disable auto-formatting shortcodes
- */
-// remove_filter('the_content', 'wpautop');
-// add_filter('the_content', 'wpautop', 9999);
 
 /**
  * Implement the Custom Header feature.
