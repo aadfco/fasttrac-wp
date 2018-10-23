@@ -153,7 +153,7 @@ $text = $careers_btn['text'];
         </div>
       </div>
       <div class="inner-row">
-        <div class="section-content small-order-2 medium-order-1 wow animated slideInLeft animation-delay-300ms">
+        <div class="careers-content small-order-2 medium-order-1 wow animated slideInLeft animation-delay-300ms">
           <p><?php echo $careers_p; ?></p>
           <?php if( $careers_btn ) :?>
           <a href="<?php echo $link; ?>" class="button"><?php echo $text; ?></a>
