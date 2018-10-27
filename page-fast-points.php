@@ -56,61 +56,118 @@ $hte_header = get_field('how_to_earn_header');
 
   <section class="in-store-fast-points">
     <div class="container">
+
       <div class="inner-row">
         <div class="section-title">
           <h1 class="superhero">Fast Points Clubs</h1>
         </div>
       </div>
-      <div class="fpc-table-wrapper">
-        <?php
-        $table = get_field( 'fast_points_club_table' );
 
-          if ( $table ) {
+			<div class="fpc-cards-wrapper">
 
-              echo '<table>';
+        <div class="grid-x grid-padding-x small-up-1 large-up-3">
+				<?php if( have_rows('fast_points_club_cards') ): ?>
+					<?php while( have_rows('fast_points_club_cards') ): the_row();
+					$img = get_sub_field('card_image');
+					$imgArray = wp_get_attachment_image($img, 'full');
+					$header = get_sub_field('card_header');
+					$subhead = get_sub_field('card_subheader');
+					?>
+          <div class="cell">
+            <div class="card fpc-card">
 
-                  if ( $table['header'] ) {
+              <div class="card-image">
+                <?php echo $imgArray; ?>
+              </div>
 
-                      echo '<thead>';
+              <div class="card-title">
+                <h4><?php echo $header; ?></h4>
+                <h6><?php echo $subheader; ?></h6>
+              </div>
 
-                          echo '<tr>';
+              <div class="card-content">
+							<?php if( have_rows('card_items') ): ?>
+                <ul>
+								<?php while( have_rows('card_items') ): the_row();
+									$item = get_sub_field('item');
+									?>
+                  <li><?php echo $item; ?></li>
+								<?php endwhile; ?>
+                </ul>
+							<?php endif; ?>
+              </div>
 
-                              foreach ( $table['header'] as $th ) {
+            </div><!-- end card fpc-card -->
+          </div><!-- end cell -->
+					<?php endwhile; ?>
+				<?php endif; ?>
 
-                                  echo '<th>';
-                                      echo $th['c'];
-                                  echo '</th>';
-                              }
+				</div><!-- end grid-x -->
 
-                          echo '</tr>';
 
-                      echo '</thead>';
-                  }
+			</div><!-- end fpc-cards-wrapper -->
 
-                  echo '<tbody>';
+    </div><!-- end container -->
 
-                      foreach ( $table['body'] as $tr ) {
+		<div class="banner-wrapper">
+			<?php if( have_rows('fast_points_club_banners') ): ?>
+			<?php while(have_rows('fast_points_club_banners') ): the_row();
+				$bgColor = get_sub_field_object('banner_background_color');
+				$position = get_sub_field_object('image_content_position');
+				$img = get_sub_field('image');
+				$imgArray = wp_get_attachment_image($img, 'full');
+				$header = get_sub_field('banner_header');
+				$subheader= get_sub_field('banner_subheader');
+				$conditional = get_sub_field('banner_conditions');
+			?>
+			<div class="section-banner inner-row <?php echo $bgColor['value']; ?>">
+				<?php
+					if(strpos($position['value'], 'left') === 0) {
+						echo '<div class="banner-img-wrapper small-order-1 large-order-1">
+									'. $imgArray .'
+									</div>
+									<div class="banner-content small-order-2 large-order-2">
+										<h2 class="standard-shadow">'. $header .'</h2>
+										<p>'. $subheader .'</p>';
 
-                          echo '<tr>';
+						if( have_rows('banner_items') ):
+							echo '<ul>';
+							while( have_rows('banner_items') ): the_row();
+								$item = get_sub_field('item');
+							echo '<li>'. $item .'</li>';
+							endwhile;
+							echo '</ul>';
+						endif;
+						echo '</div>';
+					}
 
-                              foreach ( $tr as $td ) {
+					else {
+						echo '<div class="banner-img-wrapper small-order-1 large-order-2">
+									'. $imgArray .'
+									</div>
+									<div class="banner-content small-order-1 large-order-1">
+										<h2 class="standard-shadow">'. $header .'</h2>
+										<p>'. $subheader .'</p>';
 
-                                  echo '<td>';
-                                      echo $td['c'];
-                                  echo '</td>';
-                              }
+					if( have_rows('banner_items') ):
+						echo '<ul>';
+						while( have_rows('banner_items') ): the_row();
+							$item = get_sub_field('item');
+						echo '<li>'. $item .'</li>';
+						endwhile;
+						echo '</ul>
+						<p class="conditional-rules">'. $conditional .'</p>';
+					endif;
+					echo '</div>';
+					}
+				?>
 
-                          echo '</tr>';
-                      }
+			</div>
+			<?php endwhile;
+			endif;
+			?>
 
-                  echo '</tbody>';
 
-              echo '</table>';
-          }
-        ?>
-
-      </div>
-    </div>
   </section> <!-- end in-store-fast-points -->
 
 
@@ -169,5 +226,4 @@ $hte_header = get_field('how_to_earn_header');
       <?php endif; ?>
     </div>
   </div>
-
 <?php get_footer(); ?>
