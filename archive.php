@@ -18,7 +18,7 @@ get_header();
 <?php
 $term = get_queried_object();
 $cat_image = get_field('image', $term);
-$cat_image_array = wp_get_attachment_image_src($cat_image, 'xlarge');
+$cat_image_array = wp_get_attachment_image_src($cat_image, 'xxl');
 $cat_color = get_field('color', $term);
 $cat_sub = get_field('category_subheading', $term);
 ?>
