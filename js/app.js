@@ -77,37 +77,34 @@
 
   // Animated Number Counter
   var a = 0;
-  var aboutCheck = window.location.href.indexOf('about.php');
+  var countItems = document.querySelectorAll('.counter-items-container');
 
-  window.onload = function() {
-    if (aboutCheck > -1) {
-      $(window).scroll(function() {
-        var oTop = $('.counter-items-container').offset().top - window.innerHeight;
-        if (a == 0 && $(window).scrollTop() > oTop) {
-          $('.counter-number').each(function() {
-            var $this = $(this),
-              countTo = $this.attr('data-count');
-            $({
-              countNum: $this.text()
-            }).animate({
-                countNum: countTo
-              },
-              {
-                duration: 3000,
-                easing: 'swing',
-                step: function() {
-                  $this.text(Math.floor(this.countNum));
-                },
-                complete: function() {
-                  $this.text(this.countNum);
-                  //alert('finished');
-                }
-              });
+
+  if (countItems) {
+    function counterAnimate() {
+      $('.counter-number').each(function() {
+        var $this = $(this),
+          countTo = $this.attr('data-count');
+        $({
+          countNum: $this.text()
+        }).animate({
+            countNum: countTo
+          },
+          {
+            duration: 3000,
+            easing: 'swing',
+            step: function() {
+              $this.text(Math.floor(this.countNum));
+            },
+            complete: function() {
+              $this.text(this.countNum);
+              //alert('finished');
+            }
           });
-          a = 1;
-        }
       });
+      a = 1;
     }
+    document.addEventListener('scroll', counterAnimate);
   }
 
 })(jQuery); //end document.ready
