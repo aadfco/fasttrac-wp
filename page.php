@@ -15,6 +15,17 @@
 get_header();
 ?>
 
+<?php
+$featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'xxl' );
+?>
+
+<div class="page-hero" style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
+  <div class="page-hero-content centered">
+    <h1 class="standard-shadow"><?php the_title(); ?></h1>
+    <!-- <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
+  </div>
+</div>
+
 	<div id="primary" class="content-area container">
 		<main id="main" class="site-main">
 
@@ -36,5 +47,4 @@ get_header();
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
 get_footer();
