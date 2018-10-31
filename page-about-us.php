@@ -35,11 +35,11 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
 </section>
 
 <section class="stacks">
-  <div class="stacked-wrapper inner-row" data-equalizer>
+  <div class="stacked-wrapper inner-row border-top" data-equalizer>
     <div class="stack-media large-order-2 wow animated fadeIn" role="img" aria-label="Success Image" data-equalizer-watch style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
       <!-- <img src="img/fasttrac-day@1000px.jpg" alt=""> -->
     </div>
-    <div class="stack-content sc-bc container large-order-1 wow animated fadeIn" data-equalizer-watch>
+    <div class="stack-content container large-order-1 wow animated fadeIn" data-equalizer-watch>
       <h1>our success story</h1>
       <p>Fast Trac is a convenience store chain based in Youngstown, Ohio. For nearly twenty years, our mission at Fast Trac has been to meet the growing needs of the customers. Obviously, things have continued to change over the years. Life has become faster and much busier, and our customers expect us to be there to help them along the way. One thing that hasn't changed is our commitment to our customers, employees and especially the communities in which we operate on a daily basis.</p>
       <p>Hadi A. Hadi and Dan Qutail founded the Fast Trac convenience store chain after coming together with an idea to create a local convenience store chain in the the town they both had grown up in. The first location that was purchased was located in Liberty Township where Hadi and Dan both worked together to operate. This location was operated under Xpress Fuel Mart.</p>
