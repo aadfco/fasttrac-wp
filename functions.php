@@ -102,20 +102,20 @@ endif;
 add_action( 'after_setup_theme', 'fasttrac_setup' );
 
 /**
-	* Add image sizes to Media Dialog
-	*
-	*/
-	add_filter( 'image_size_names_choose', 'fasttrac_custom_sizes' );
+* Add image sizes to Media Dialog
+*
+*/
+add_filter( 'image_size_names_choose', 'fasttrac_custom_sizes' );
 
-	function fasttrac_custom_sizes( $sizes ) {
-		return array_merge( $sizes, array(
-			'small' => __('Small'),
-			'medium' => __('Medium'),
-			'large' => __('Large'),
-			'xlarge' => __('XLarge'),
+function fasttrac_custom_sizes( $sizes ) {
+	return array_merge( $sizes, array(
+		'small' => __('Small'),
+		'medium' => __('Medium'),
+		'large' => __('Large'),
+		'xlarge' => __('XLarge'),
 
-		));
-	}
+	));
+}
 
 /**
 * Disable default error login message
