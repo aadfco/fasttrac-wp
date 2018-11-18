@@ -155,26 +155,6 @@ add_filter( 'login_headertitle', 'my_login_logo_url_title' );
  	acf_add_options_page();
  }
 
- /**
- * Careers Custom Post Type
- * @link https://codex.wordpress.org/Post_Types
- */
- // function create_post_type() {
- //   register_post_type( 'careers',
- //     array(
- //       'labels' => array(
- //         'name' => __( 'Careers' ),
- //         'singular_name' => __( 'Career' )
- //       ),
- //       'public' => true,
- //       'has_archive' => true,
- //     )
- //   );
- // }
- // add_action( 'init', 'create_post_type' );
-
- add_action('admin_head', 'acf_table_styles');
-
 function acf_table_styles() {
   echo '<style>
     .acf-table-header-cont,
@@ -183,6 +163,13 @@ function acf_table_styles() {
     }
   </style>';
 }
+
+/**
+ * Add theme support for WP Job Manager
+ *
+ */
+add_theme_support( 'job-manager-templates' );
+
 
 
 /**
@@ -276,6 +263,7 @@ function dcwd_youtube_wrapper( $html, $url, $attr, $post_ID ) {
 }
 add_filter( 'embed_oembed_html', 'dcwd_youtube_wrapper', 10, 4 );
 
+
 /**
  * Register widget area.
  *
@@ -364,6 +352,20 @@ function my_tinymce_styles( $init_array ) {
 }
 // Attach callback to 'tiny_mce_before_init'
 add_filter( 'tiny_mce_before_init', 'my_tinymce_styles' );
+
+// Google Analytics
+add_action('wp_head', 'wpb_add_googleanalytics');
+function wpb_add_googleanalytics() { ?>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129352831-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-129352831-1');
+	</script>
+<?php }
 
 /**
  * Enqueue scripts and styles.
