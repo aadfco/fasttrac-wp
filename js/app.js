@@ -1,9 +1,28 @@
 // No conflict var calls
+var ftCookie = Cookies.noConflict();
 var jQn = jQuery.noConflict();
 
 // Initialize Foundation
 jQn(document).foundation();
 
+// Enable cookie when Got It button is clicked on cookie banner
+function cNotifyDismiss() {
+  ftCookie.set('eucBanner', 'true', {expires: 365, path: '/'});
+}
+
+// Cookie Banner Fetch Call
+var cnbFetch = ftCookie.get('eucBanner');
+
+// Hide Cookied elements if cookies exists.
+var cnwElement = document.querySelector(".c-notify-wrapper");
+
+function cnbHide(){
+  cnwElement.parentNode.removeChild(cnwElement);
+}
+
+if(cnbFetch){
+  cnbHide();
+}
 
 // Iniitialize Hamburger Menu
 jQn('.hamburger').click(function(){

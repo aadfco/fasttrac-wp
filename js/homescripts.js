@@ -1,18 +1,10 @@
 // Cookie noConflict naming and jQuery No Conflict
-var ftCookie = Cookies.noConflict();
 var jQn = jQuery.noConflict();
 
-// Enable cookie when Got It button is clicked on cookie banner
-function cNotifyDismiss() {
-  ftCookie.set('eucBanner', 'true', {expires: 365, path: '/'});
-}
-
-// Cookie fetch call variables
+// Cookie fetch call variables *Note: ftCookie variable is called from app.js
 var fprCFetch = ftCookie.get('fprPopup');
-var cnbFetch = ftCookie.get('eucBanner');
 
 // Hide Cookied elements if cookies exists.
-var cnwElement = document.querySelector(".c-notify-wrapper");
 var fprElement = document.querySelector(".fast-points-reminder");
 
 function fprHide(){
@@ -21,14 +13,6 @@ function fprHide(){
 
 if(fprCFetch){
   fprHide();
-}
-
-function cnbHide(){
-  cnwElement.parentNode.removeChild(cnwElement);
-}
-
-if(cnbFetch){
-  cnbHide();
 }
 
 // Enable cookie when close button is clicked on Fast Points Reminder
