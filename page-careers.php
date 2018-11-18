@@ -24,8 +24,10 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
         <div class="tabs-panel is-active animated fadeIn" id="jobs">
 
           <div class="inner-row large-up-3 small-up-2">
+            <?php if(have_posts()) : while(have_posts()) : ?>
+              <?php the_post(); ?>
             <?php
-            $taxonomy = 'jobpost_category';
+            $taxonomy = 'job_listing_category';
             $terms = get_terms($taxonomy, $args = array(
               'hide_empty' => false,
             ));
@@ -33,7 +35,7 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
             ?>
 
             <?php foreach( $terms as $term ) :
-            $catIMG = get_field('job_cat_image', 'jobpost_category_' . $term->term_id);
+            $catIMG = get_field('job_cat_image', 'job_listing_category_' . $term->term_id);
             ?>
 
 
@@ -47,7 +49,11 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
             </a>
 
             <?php endforeach;?>
+          <?php endwhile; ?>
 
+            <?php else : ?>
+              <h4><?php esc_html_e( 'Sorry, but no job listings are availble at this time. Please check back later.', 'fasttrac' ); ?></h4>
+            <?php endif; ?>
           </div>
 
         </div>
