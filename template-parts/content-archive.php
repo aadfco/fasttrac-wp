@@ -20,7 +20,7 @@ $post_date = get_the_date( 'F d, Y' );
 
 	<div class="post-category">
 		<i class="fas fa-folder-open"></i>
-		<span><?php echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>'; ?></span>
+		<span><strong><?php echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>'; ?></strong></span>
 	</div>
 
 	<header class="entry-header">
