@@ -53,8 +53,8 @@ $fp_btn_2_link = get_field('fast_points_btn_2_link');
       </div>
       <div class="inner-row align-center wow animated bounceIn animation-delay-300ms">
         <div class="btn-row">
-          <a href="<?php echo $fp_btn_1_link; ?>" class="button black-btn"><?php echo $fp_btn_1_text; ?></a>
-          <a href="<?php echo $fp_btn_2_link; ?>" class="button white-btn"><?php echo $fp_btn_2_text; ?></a>
+          <a href="<?php echo $fp_btn_1_link['url']; ?>" target="<?php echo $fp_btn_1_link['target']; ?>" class="button black-btn"><?php echo $fp_btn_1_text; ?></a>
+          <a href="<?php echo $fp_btn_2_link['url']; ?>" target="<?php echo $fp_btn_2_link['target']; ?>" class="button white-btn"><?php echo $fp_btn_2_text; ?></a>
         </div>
       </div>
     </div>
