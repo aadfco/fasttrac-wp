@@ -1,3 +1,4 @@
+
 <?php
 /**
  * The template for displaying all single posts
@@ -23,9 +24,9 @@ $post_date = get_the_date( 'F d, Y' );
 		    <div class="category-info">
 		      <span>|</span> In <a href="#"><?php foreach((get_the_category()) as $category) { echo $category->cat_name . ' '; }; ?></a>
 		    </div>
-		    <div class="author-info">
+		    <!-- <div class="author-info">
 		      <span>|</span> By <a href="#"><?php fasttrac_post_author(); ?></a>
-		    </div>
+		    </div> -->
 		  </div>
 		</div>
 	</div>
