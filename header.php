@@ -122,7 +122,7 @@
 							$fp_logo_link = get_field('fast_points_link', 'option')
 							?>
               <div class="fp-logo">
-                <a href="<?php echo $fp_logo_link; ?>">
+                <a href="<?php echo $fp_logo_link['url']; ?>" target="<?php echo $fp_logo_link['target']; ?>">
 									<?php
 										if( !empty($fp_logo) ): ?>
 											<img src="<?php echo $fp_logo['url']; ?>" alt="<?php echo $fp_logo['alt']; ?>" />
