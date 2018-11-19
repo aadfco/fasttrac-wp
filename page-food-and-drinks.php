@@ -13,7 +13,9 @@ $hotDrinksIMGArray = wp_get_attachment_image_src($hotDrinksIMG, 'large');
 ?>
 
 <div class="page-hero food-and-drinks" style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
-
+  <div class="page-hero-content centered">
+    <h1 class="standard-shadow"><?php the_title( __( '', 'fasttrac' ) ); ?></h1>
+  </div>
 </div>
 
 <section class="filter-simple border-bottom">
@@ -121,61 +123,39 @@ $hotDrinksIMGArray = wp_get_attachment_image_src($hotDrinksIMG, 'large');
   <div class="container">
 
     <div class="inner-row grid-margin-x small-up-1 large-up-3">
+    <?php if( have_rows('current_deals_cards') ): ?>
+    <?php while( have_rows('current_deals_cards') ): the_row();
+      $img = get_sub_field('deal_image');
+      $imgArray = wp_get_attachment_image($img, 'full');
+      $header = get_sub_field('deal_header');
+      $info = get_sub_field('deal_info');
+      $disclaimer = get_sub_field('deal_disclaimer');
+      ?>
 
       <div class="fad-deal-card">
 
         <div class="card-image">
-          <img src="https://unsplash.it/550/300/" alt="">
+          <?php echo $imgArray; ?>
         </div>
 
         <header class="entry-header">
-          <h3>Buy 1 Get One for $1</h3>
+          <h3><?php echo $header; ?></h3>
         </header>
 
         <div class="card-section">
-          <p class="fad-deal-description">This is the current promotion for this deal.</p>
-          <p class="fad-deal-disclaimer">Offer valid 7/2-12/30/18 at participating McDonald’s. McD App download and registration required. Mobile Order & Pay at participating McDonald's. ©2018 McDonald's</p>
+          <p class="fad-deal-description"><?php echo $info; ?></p>
+          <p class="fad-deal-disclaimer"><?php echo $disclaimer; ?></p>
         </div>
 
       </div>
+      <?php 
+      endwhile;
+      endif; 
+      ?>
 
-      <div class="fad-deal-card">
+    </div><!-- end inner-row -->
 
-        <div class="card-image">
-          <img src="https://unsplash.it/550/300/" alt="">
-        </div>
-
-        <header class="entry-header">
-          <h3>Buy 1 Get One for $1</h3>
-        </header>
-
-        <div class="card-section">
-          <p class="fad-deal-description">This is the current promotion for this deal.</p>
-          <p class="fad-deal-disclaimer">Offer valid 7/2-12/30/18 at participating McDonald’s. McD App download and registration required. Mobile Order & Pay at participating McDonald's. ©2018 McDonald's</p>
-        </div>
-
-      </div>
-
-      <div class="fad-deal-card">
-
-        <div class="card-image">
-          <img src="https://unsplash.it/550/300/" alt="">
-        </div>
-
-        <header class="entry-header">
-          <h3>Buy 1 Get One for $1</h3>
-        </header>
-
-        <div class="card-section">
-          <p class="fad-deal-description">This is the current promotion for this deal.</p>
-          <p class="fad-deal-disclaimer">Offer valid 7/2-12/30/18 at participating McDonald’s. McD App download and registration required. Mobile Order & Pay at participating McDonald's. ©2018 McDonald's</p>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+  </div><!-- end container -->
 
 </section>
 
