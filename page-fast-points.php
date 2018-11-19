@@ -222,7 +222,7 @@ $hte_header = get_field('how_to_earn_header');
     <div class="join-fastpoints-hero-content">
       <h1><?php echo $jfp_header; ?></h1>
       <?php if( $jfp_btn ) : ?>
-      <a href="<?php echo $link; ?>" class="button"><?php echo $text; ?></a>
+      <a href="<?php echo $link['url']; ?>" target="<?php echo $link['target']; ?>" class="button"><?php echo $text; ?></a>
       <?php endif; ?>
     </div>
   </div>
