@@ -25,12 +25,12 @@ $hte_header = get_field('how_to_earn_header');
       <div class="card-wrapper">
         <div class="grid-x grid-padding-x small-up-1 large-up-3">
           <?php if( have_rows('how_to_earn_cards') ): ?>
-           <?php while( have_rows('how_to_earn_cards') ): the_row();
-           // ACF Repeater Variables
-           $icon = get_sub_field('icon');
-           $header = get_sub_field('header');
-           $p = get_sub_field('paragraph');
-           ?>
+          <?php while( have_rows('how_to_earn_cards') ): the_row();
+          // ACF Repeater Variables
+          $icon = get_sub_field('icon');
+          $header = get_sub_field('header');
+          $p = get_sub_field('paragraph');
+          ?>
           <div class="cell">
             <div class="card">
               <div class="card-icon-circle">
@@ -183,13 +183,13 @@ $hte_header = get_field('how_to_earn_header');
         <div class="faq-accordion">
           <ul class="accordion" data-accordion data-allow-all-closed="true" data-multi-expand="true">
             <?php if( have_rows('faq') ): ?>
-             <?php while( have_rows('faq') ): the_row();
-             // ACF Repeater Variables
-             $q = get_sub_field('question');
-             $a = get_sub_field('answer');
-             $i == 0;
-             $faq_count = count(get_field('faq'));
-             ?>
+            <?php while( have_rows('faq') ): the_row();
+            // ACF Repeater Variables
+            $q = get_sub_field('question');
+            $a = get_sub_field('answer');
+            $i == 0;
+            $faq_count = count(get_field('faq'));
+            ?>
 
             <li class="<?php if( $faq_count == $i ) echo 'is-active'; ?> accordion-item" data-accordion-item>
               <a href="#" class="accordion-title"><h6><?php echo $q; ?></h6></a>

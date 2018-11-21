@@ -63,18 +63,18 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 		) );
 
 		/**
-			* Enable support for Post Thumbnails on posts and pages.
-			*
-			* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-			*/
-			add_theme_support( 'post-thumbnails' );
+		* Enable support for Post Thumbnails on posts and pages.
+		*
+		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+		*/
+		add_theme_support( 'post-thumbnails' );
 
-			add_image_size( 'small', 320, 9999 );
-			add_image_size('small-square', 320, 320, true);
-			add_image_size( 'medium-square', 640, 640, true );
-			add_image_size( 'xlarge', 1200, 9999 );
-			add_image_size( 'xxl', 1600, 9999 );
-			add_image_size( 'huge', 2000, 9999 );
+		add_image_size( 'small', 320, 9999 );
+		add_image_size('small-square', 320, 320, true);
+		add_image_size( 'medium-square', 640, 640, true );
+		add_image_size( 'xlarge', 1200, 9999 );
+		add_image_size( 'xxl', 1600, 9999 );
+		add_image_size( 'huge', 2000, 9999 );
 
 
 		// Set up the WordPress core custom background feature.
