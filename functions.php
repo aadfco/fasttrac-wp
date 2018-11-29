@@ -133,6 +133,26 @@ add_filter( 'login_errors', 'no_wordpress_errors' );
  }
  add_action('login_head', 'fasttrac_custom_login');
 
+/**
+ * Redirect Private Pages to Login
+ */
+add_action('template_redirect', 'private_content_redirect_to_login', 9);
+
+function private_content_redirect_to_login() {
+global $wp_query,$wpdb;
+
+    if (is_404()) {
+        $private = $wpdb->get_row($wp_query->request);
+        $location = wp_login_url($_SERVER["REQUEST_URI"]);
+
+        if( 'private' == $private->post_status  ) {
+            wp_safe_redirect($location);
+
+    exit;
+
+        }
+    }
+}
 
 /**
 * Change URL for Logo on Login Screen
