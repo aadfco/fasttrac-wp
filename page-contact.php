@@ -17,107 +17,107 @@ get_header();
 
 <?php
 $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'xlarge' );
+$map_embed = get_field('map_embed');
 $form_embed = get_field('contact_form_embed');
 ?>
 
 <div class="page-hero" style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
+
   <div class="page-hero-content centered">
+
     <h1 class="standard-shadow"><?php the_title(); ?></h1>
-    <!-- <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
-  </div>
-</div>
+    
+  </div><!-- end page-hero-content -->
+
+</div><!-- end page-hero -->
 
 <div class="contact-info-wrapper">
-  <div class="container">
-    <div class="inner-row align-center">
 
-      <div class="contact-info">
+    <div class="container">
 
-        <div class="contact-circle">
-          <div class="circle-icon">
-            <i class="fas fa-phone"></i>
-          </div>
-        </div>
+        <div class="inner-row align-center">
 
-        <div class="contact-details">
-          <h1>Call</h1>
-          <p>330-759-1025</p>
-        </div>
+        <?php if( have_rows('contact_info') ): ?>
 
-      </div><!--end contact-info Phone-->
+        <?php while( have_rows('contact_info') ): the_row(); 
+        $icon = get_sub_field('contact_info_icon');
+        $title = get_sub_field('contact_info_title');
+        $info = get_sub_field('contact_info_details');
+        ?>
 
-      <div class="contact-info">
+            <div class="contact-info">
 
-        <div class="contact-circle">
-          <div class="circle-icon">
-            <i class="fas fa-paper-plane"></i>
-          </div>
-        </div>
+                <div class="contact-circle">
 
-        <div class="contact-details">
-          <h1>Email</h1>
-          <p>info@fasttracstores.com</p>
-        </div>
+                    <div class="circle-icon">
 
-      </div><!--end contact-info Email-->
+                        <i class="<?php echo $icon; ?>"></i>
 
-      <div class="contact-info">
+                    </div><!-- end circle-icon -->
 
-        <div class="contact-circle">
-          <div class="circle-icon">
-            <i class="fas fa-fax"></i>
-          </div>
-        </div>
+                </div><!-- end contact-circle -->
 
-        <div class="contact-details">
-          <h1>fax</h1>
-          <p>330-759-1028</p>
-        </div>
+                <div class="contact-details">
 
-      </div><!--end contact-info Fax-->
+                    <h1><?php echo $title; ?></h1>
 
-      <div class="contact-info">
+                    <p><?php echo $info; ?>
 
-        <div class="contact-circle">
-          <div class="circle-icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-        </div>
+                    <?php if( have_rows('contact_info_details_span') ): ?>
 
-        <div class="contact-details">
-          <h1>Address</h1>
-          <p>1057 Trumbull Ave.
-          <span>Suite A</span>
-          <span>Girard, Ohio 44420</span>
-          </p>
-        </div>
+                    <?php while( have_rows('contact_info_details_span') ): the_row(); 
+                    $span_line = get_sub_field('span_line') ;
+                    ?>
 
-      </div><!--end contact-info Address-->
+                        <span><?php echo $span_line; ?></span>
 
-    </div><!-- end inner-row -->
-  </div><!-- end container -->
+                    <?php endwhile;
+                    endif; ?>    
+
+                    </p>
+                    
+                </div><!-- end contact-details -->
+
+            </div><!--end contact-info -->
+
+
+        <?php endwhile; 
+        endif; ?>
+
+        </div><!-- end inner-row -->
+
+    </div><!-- end container -->
+
 </div><!--end contact-info-wrapper -->
 
-    <div class="map-contact">
+<div class="map-contact">
 
-      <div class="container">
+    <div class="container">
 
         <div class="inner-row">
 
-          <div class="map-wrapper">
-            <div class="responsive-embed">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.749641775663!2d-80.6749997839767!3d41.139991019256826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8833e5d438212a41%3A0xb9da7f68d5047fd9!2s1057+Trumbull+Ave%2C+Youngstown%2C+OH+44505!5e0!3m2!1sen!2sus!4v1535037782183" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
-            </div>
-          </div>
+            <div class="map-wrapper">
 
-          <div class="contact-form-wrapper">
+                <div class="responsive-embed">
 
-            <?php echo $form_embed; ?>
-          
-          </div>
+                    <?php echo $map_embed; ?>
 
-      </div><!-- end inner-row -->
+                    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.749641775663!2d-80.6749997839767!3d41.139991019256826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8833e5d438212a41%3A0xb9da7f68d5047fd9!2s1057+Trumbull+Ave%2C+Youngstown%2C+OH+44505!5e0!3m2!1sen!2sus!4v1535037782183" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+
+                </div><!-- end responsive-embed -->
+        
+            </div><!-- end map-wrapper -->
+
+            <div class="contact-form-wrapper">
+
+                <?php echo $form_embed; ?>
+        
+            </div><!-- end contact-form-wrapper -->
+
+        </div><!-- end inner-row -->
 
     </div><!-- end container-->
 
-<?php get_footer();
+</div><!-- end map-contact -->
+
+<?php get_footer(); ?>
