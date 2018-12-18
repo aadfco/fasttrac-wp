@@ -278,26 +278,18 @@ add_action( 'after_setup_theme', 'fasttrac_content_width', 0 );
   }
  }
 
-// /**
-//  * Wrap YouTube Embeds in responsive divs.
-//  *
-//  */
-// function dcwd_youtube_wrapper( $html, $url, $attr, $post_ID ) {
-// 	$classes[] = 'responsive-embed widescreen';
-//     if (stripos($url, "youtube.com/") !== FALSE || stripos($url, "youtu.be/") !== FALSE) {
-// 		$classes[] = 'video-container';
-//     }
-//     return '<div class="' . implode( ' ', $classes ) . '">' . $html . '</div>';
-// }
-// add_filter( 'embed_oembed_html', 'dcwd_youtube_wrapper', 10, 4 );
-
 /**
-* Add theme support for Responsive Videos.
-*/
-function jetpackme_responsive_videos_setup() {
-    add_theme_support( 'jetpack-responsive-videos' );
+ * Wrap YouTube Embeds in responsive divs.
+ *
+ */
+function dcwd_youtube_wrapper( $html, $url, $attr, $post_ID ) {
+	$classes[] = 'responsive-embed widescreen';
+    if (stripos($url, "youtube.com/") !== FALSE || stripos($url, "youtu.be/") !== FALSE) {
+		$classes[] = 'video-container';
+    }
+    return '<div class="' . implode( ' ', $classes ) . '">' . $html . '</div>';
 }
-add_action( 'after_setup_theme', 'jetpackme_responsive_videos_setup' );
+add_filter( 'embed_oembed_html', 'dcwd_youtube_wrapper', 10, 4 );
 
 /**
  * Register widget area.
