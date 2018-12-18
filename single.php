@@ -65,18 +65,6 @@ $post_date = get_the_date( 'F d, Y' );
         </div>
         
     <?php endif; ?>
-
-    <hr>
-
-    <div class="post-navigation">
-
-        <h5>Continue reading more posts</h5>
-
-            <?php previous_post_link(  '%link', '&laquo; Previous Post', true ); ?>
-
-            | <?php next_post_link( '%link', 'Next Post  &raquo;', true ); ?>
-
-    </div>
    
 
 <?php get_footer();
