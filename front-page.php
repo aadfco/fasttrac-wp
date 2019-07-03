@@ -53,8 +53,8 @@ $fp_btn_2_link = get_field('fast_points_btn_2_link');
       </div>
       <div class="inner-row align-center wow animated bounceIn animation-delay-300ms">
         <div class="btn-row">
-          <a href="<?php echo $fp_btn_1_link; ?>" class="button black-btn"><?php echo $fp_btn_1_text; ?></a>
-          <a href="<?php echo $fp_btn_2_link; ?>" class="button white-btn"><?php echo $fp_btn_2_text; ?></a>
+          <a href="<?php echo $fp_btn_1_link['url']; ?>" target="<?php echo $fp_btn_1_link['target']; ?>" class="button black-btn"><?php echo $fp_btn_1_text; ?></a>
+          <a href="<?php echo $fp_btn_2_link['url']; ?>" target="<?php echo $fp_btn_2_link['target']; ?>" class="button white-btn"><?php echo $fp_btn_2_text; ?></a>
         </div>
       </div>
     </div>
@@ -166,8 +166,9 @@ $text = $careers_btn['text'];
     </div>
   </section>
 
+  <!-- Fast Points Reminder Popup -->
   <div class="fast-points-reminder" data-closable>
-    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+    <button class="close-button" onclick="fprDismiss()" aria-label="Dismiss alert" type="button" data-close>
       <span aria-hidden="true">&times;</span>
     </button>
     <div class="inner-row reminder-window align-middle">
@@ -177,7 +178,7 @@ $text = $careers_btn['text'];
       <div class="cell small-8 reminder-message">
         <h1>Did you forget to sign up for Fast Points?</h1>
         <p>Earn instant rewards with each purchase at checkout!</p>
-        <a href="./fastpoints.php" class="button">Learn More</a>
+        <a href="<?php echo get_home_url(); ?>/fast-points" class="button">Learn More</a>
       </div>
     </div>
   </div>
