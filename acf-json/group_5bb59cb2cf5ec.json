@@ -1,6 +1,6 @@
 {
     "key": "group_5bb59cb2cf5ec",
-    "title": "Header and Footer",
+    "title": "Fast Trac Theme Settings",
     "fields": [
         {
             "key": "field_5bb9104c3b486",
@@ -27,7 +27,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
@@ -51,11 +51,11 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "70",
                 "class": "",
                 "id": ""
             },
-            "return_format": "url"
+            "return_format": "array"
         },
         {
             "key": "field_5bb910663b487",
@@ -76,7 +76,7 @@
         {
             "key": "field_5bb52f1faef2c",
             "label": "Social Media Icon",
-            "name": "social_media_icons",
+            "name": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -89,25 +89,9 @@
             "collapsed": "",
             "min": 0,
             "max": 0,
-            "layout": "row",
+            "layout": "table",
             "button_label": "",
             "sub_fields": [
-                {
-                    "key": "field_5bb7d58d02878",
-                    "label": "Social Media Link",
-                    "name": "social_media_link",
-                    "type": "url",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": ""
-                },
                 {
                     "key": "field_5bb7d5bb02879",
                     "label": "Social Media Icon",
@@ -117,7 +101,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "50",
+                        "width": "40",
                         "class": "",
                         "id": ""
                     },
@@ -128,6 +112,22 @@
                     "enqueue_fa": 0,
                     "fa_live_preview": "",
                     "choices": []
+                },
+                {
+                    "key": "field_5bb7d58d02878",
+                    "label": "Social Media Link",
+                    "name": "social_media_link",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": ""
                 }
             ]
         }
@@ -137,7 +137,7 @@
             {
                 "param": "options_page",
                 "operator": "==",
-                "value": "acf-options"
+                "value": "fasttrac-theme-settings"
             }
         ]
     ],
@@ -149,5 +149,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1538855522
+    "modified": 1548087339
 }
