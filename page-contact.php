@@ -102,8 +102,6 @@ $form_embed = get_field('contact_form_embed');
 
                     <?php echo $map_embed; ?>
 
-                    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.749641775663!2d-80.6749997839767!3d41.139991019256826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8833e5d438212a41%3A0xb9da7f68d5047fd9!2s1057+Trumbull+Ave%2C+Youngstown%2C+OH+44505!5e0!3m2!1sen!2sus!4v1535037782183" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe> -->
-
                 </div><!-- end responsive-embed -->
         
             </div><!-- end map-wrapper -->
