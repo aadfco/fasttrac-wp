@@ -15,20 +15,12 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>/favicon-16x16.png">
-	<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/site.webmanifest">
-	<link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/safari-pinned-tab.svg" color="#ed1c24">
-	<meta name="apple-mobile-web-app-title" content="Fast Trac">
-	<meta name="application-name" content="Fast Trac">
-	<meta name="msapplication-TileColor" content="#ed1c24">
-	<meta name="theme-color" content="#ffffff">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 	<header class="navigation">
       <div class="top-nav">
         <div class="full-container">
@@ -122,7 +114,7 @@
 							$fp_logo_link = get_field('fast_points_link', 'option')
 							?>
               <div class="fp-logo">
-                <a href="<?php echo $fp_logo_link; ?>">
+                <a href="<?php echo $fp_logo_link['url']; ?>" target="<?php echo $fp_logo_link['target']; ?>">
 									<?php
 										if( !empty($fp_logo) ): ?>
 											<img src="<?php echo $fp_logo['url']; ?>" alt="<?php echo $fp_logo['alt']; ?>" />
