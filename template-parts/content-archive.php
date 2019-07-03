@@ -20,7 +20,7 @@ $post_date = get_the_date( 'F d, Y' );
 
 	<div class="post-category">
 		<i class="fas fa-folder-open"></i>
-		<span><?php echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>'; ?></span>
+		<span><strong><?php echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>'; ?></strong></span>
 	</div>
 
 	<header class="entry-header">
@@ -41,7 +41,7 @@ $post_date = get_the_date( 'F d, Y' );
 	<div class="post-excerpt">
     <p><?php echo wp_trim_words( get_the_content(), 20, '. . .' ); ?></p>
   </div>
-  <a href="<?php echo get_permalink(); ?>" class="button"><?php esc_html_e( 'Read More', 'fasttrac' ); ?></a>
+  <a href="<?php echo get_permalink(); ?>" class="button"><?php esc_html_e( 'Read More', 'fast-trac' ); ?></a>
 
 
 </article><!-- #post-<?php the_ID(); ?> -->
