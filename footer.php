@@ -11,6 +11,20 @@
 
 ?>
 
+<!-- Cookie Notify Banner -->
+<div class="c-notify-wrapper" data-closeable>
+	<div class="c-notify-banner">
+		<div class="inner-row align-justify align-middle">
+			<div class="cell small-12 medium-10">
+				<p>This website uses cookies to ensure you get the best experience on our website. <a href="<?php echo esc_url( home_url( '/legal-disclosure' ) ); ?>">Learn More</a></p>
+			</div>
+			<!-- <div class="cell auto"> -->
+				<button class="button yellow-btn" onclick="cNotifyDismiss()" aria-label="Dismiss Cookie Notice" type="button" data-close>Got it!</button>
+			<!-- </div> -->
+		</div>
+	</div>
+</div>
+
 	<!-- </div> end content -->
 	<footer>
     <div class="main-footer">
@@ -50,7 +64,7 @@
             <p>&copy; <?php
 						/* translators: %s: CMS name, i.e. WordPress. */
 						echo date("Y");
-						printf( esc_html__( ' Fast Trac. %s', 'fasttrac' ), 'All rights reserved.' );
+						printf( esc_html__( ' Fast Trac. %s', 'fast-trac' ), 'All rights reserved.' );
 						?>
           </div>
           <div class="bf-social">
