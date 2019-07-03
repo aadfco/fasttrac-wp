@@ -1,91 +1,90 @@
-( function($) {
-  jQuery(document).foundation()
-  $('.hamburger').click(function(){
-		$(this).toggleClass('is-active');
-	});
+// No conflict var calls
+var ftCookie = Cookies.noConflict();
+var jQn = jQuery.noConflict();
 
-  // Wow Animation Settings and Initialization
-	wow = new WOW({
-		boxClass:						'wow',
-		anmiateClass:				'animated',
-		offset:							0,
-		mobile:							true,
-		live:								true
-  	})
-	wow.init();
+// Initialize Foundation
+jQn(document).foundation();
 
-  // Fast Points Reminder Popup
-    var fpr = $('.fast-points-reminder');
-    var fprShow = "fpr-show";
+// Enable cookie when Got It button is clicked on cookie banner
+function cNotifyDismiss() {
+  ftCookie.set('eucBanner', 'true', {expires: 365, path: '/'});
+}
 
-    function fpRemind() {
-      fpr.addClass(fprShow);
-    }
+// Cookie Banner Fetch Call
+var cnbFetch = ftCookie.get('eucBanner');
 
-    var homeCheck = $(".store-locator-home").length;
+// Hide Cookied elements if cookies exists.
+var cnwElement = document.querySelector(".c-notify-wrapper");
 
-    if (homeCheck) {
-      function fprScroll() {
-        var slHome = $('.store-locator-home');
-        var docViewTop = $(window).scrollTop();
-        var docViewBottom = docViewTop + $(window).height();
-        var slTop = $(slHome).offset().top;
-        var slBottom = slTop + $(slHome).height();
+function cnbHide(){
+  cnwElement.parentNode.removeChild(cnwElement);
+}
 
-        if ((slBottom <= docViewBottom) && (slTop >= docViewTop)) {
-          fpRemind();
-        }
-      }
-    window.addEventListener('scroll',fprScroll);
-    }
+if(cnbFetch){
+  cnbHide();
+}
 
+// Iniitialize Hamburger Menu
+jQn('.hamburger').click(function(){
+	jQn(this).toggleClass('is-active');
+});
 
-  // Enable sticky tab nav on Food and Drinks Page
-    var tabnav = $('.tab-nav-group');
-    var tabnavScroll = "tab-nav-scroll";
-
-    $(window).scroll( function() {
-      var pagehero = $(".page-hero").height();
-
-      if( $(this).scrollTop() > pagehero ) {
-        tabnav.addClass(tabnavScroll);
-      }
-      else {
-        tabnav.removeClass(tabnavScroll);
-      }
-    });
+// Wow Animation Settings and Initialization
+wow = new WOW({
+	boxClass:						'wow',
+	anmiateClass:				'animated',
+	offset:							0,
+	mobile:							true,
+	live:								true
+	})
+wow.init();
 
 
-  //Hide Drinks on page load
-  $(".drinks").hide();
+
+// Enable sticky tab nav on Food and Drinks Page
+var tabnav = jQn('.tab-nav-group');
+var tabnavScroll = "tab-nav-scroll";
+
+jQn(window).scroll( function() {
+  var pagehero = jQn(".page-hero").height();
+
+  if( jQn(this).scrollTop() > pagehero ) {
+    tabnav.addClass(tabnavScroll);
+  }
+  else {
+    tabnav.removeClass(tabnavScroll);
+  }
+});
 
 
-  // shows and hides filtered items
-  $(".filter-simple-button").click(function() {
-    var value = $(this).attr('data-filter');
-      $(".stacked-wrapper").not('.'+value).hide();
-      $('.stacked-wrapper').filter('.'+value).show();
-  });
+// Food and Drinks Page: Hide Drinks on page load
+jQn(".drinks").hide();
+
+// Shows and hides filtered items
+jQn(".filter-simple-button").click(function() {
+  var value = jQn(this).attr('data-filter');
+    jQn(".stacked-wrapper").not('.'+value).hide();
+    jQn('.stacked-wrapper').filter('.'+value).show();
+});
 
 
-  // changes active class on filter buttons
-  $('.filter-simple-button').click(function () {
-    $(this).siblings().removeClass('is-active');
-    $(this).addClass('is-active');
-  });
+// Changes active class on filter buttons
+jQn('.filter-simple-button').click(function () {
+  jQn(this).siblings().removeClass('is-active');
+  jQn(this).addClass('is-active');
+});
 
 
-  // Animated Number Counter
+// Animated Number Counter
   var a = 0;
-  var countItems = document.querySelectorAll('.counter-items-container');
-
+  var countItems = document.querySelector('.counter-items-container');
 
   if (countItems) {
     function counterAnimate() {
-      $('.counter-number').each(function() {
-        var $this = $(this),
+      jQn('.counter-number').each(function() {
+        var $this = jQn(this),
           countTo = $this.attr('data-count');
-        $({
+        jQn({
           countNum: $this.text()
         }).animate({
             countNum: countTo
@@ -106,5 +105,3 @@
     }
     document.addEventListener('scroll', counterAnimate);
   }
-
-})(jQuery); //end document.ready
