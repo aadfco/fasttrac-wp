@@ -9,7 +9,7 @@ $hte_header = get_field('how_to_earn_header');
 
 	<div class="page-hero" style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
 		<div class="page-hero-content centered">
-			<h1 class="standard-shadow"><?php the_title( __( '', 'fasttrac' ) ); ?></h1>
+			<h1 class="standard-shadow"><?php the_title( __( '', 'fast-trac' ) ); ?></h1>
       <p class="subheader"><?php echo $subhead; ?></p>
 		</div>
 	</div>
@@ -222,7 +222,7 @@ $hte_header = get_field('how_to_earn_header');
     <div class="join-fastpoints-hero-content">
       <h1><?php echo $jfp_header; ?></h1>
       <?php if( $jfp_btn ) : ?>
-      <a href="<?php echo $link; ?>" class="button"><?php echo $text; ?></a>
+      <a href="<?php echo $link['url']; ?>" target="<?php echo $link['target']; ?>" class="button"><?php echo $text; ?></a>
       <?php endif; ?>
     </div>
   </div>
