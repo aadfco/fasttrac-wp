@@ -14,8 +14,8 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
     <div class="inner-row align-center">
       <ul class="tabs" data-tabs id="example-tabs">
         <li class="tabs-title is-active"><a href="#jobs" aria-selected="true">jobs</a></li>
-        <li class="tabs-title"><a data-tabs-target="benefits" href="#benefits">benefits</a></li>
-        <li class="tabs-title"><a data-tabs-target="philosophy" href="#philosophy">our philosophy</a></li>
+        <!-- <li class="tabs-title"><a data-tabs-target="benefits" href="#benefits">benefits</a></li>
+        <li class="tabs-title"><a data-tabs-target="philosophy" href="#philosophy">our philosophy</a></li> -->
       </ul>
     </div>
 
@@ -24,8 +24,10 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
         <div class="tabs-panel is-active animated fadeIn" id="jobs">
 
           <div class="inner-row large-up-3 small-up-2">
+            <?php if(have_posts()) : while(have_posts()) : ?>
+              <?php the_post(); ?>
             <?php
-            $taxonomy = 'jobpost_category';
+            $taxonomy = 'job_listing_category';
             $terms = get_terms($taxonomy, $args = array(
               'hide_empty' => false,
             ));
@@ -33,7 +35,7 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
             ?>
 
             <?php foreach( $terms as $term ) :
-            $catIMG = get_field('job_cat_image', 'jobpost_category_' . $term->term_id);
+            $catIMG = get_field('job_cat_image', 'job_listing_category_' . $term->term_id);
             ?>
 
 
@@ -46,11 +48,12 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
               </div>
             </a>
 
-          <?php
-          endforeach;
-          ?>
+            <?php endforeach;?>
+          <?php endwhile; ?>
 
-
+            <?php else : ?>
+              <h4><?php esc_html_e( 'Sorry, but no job listings are availble at this time. Please check back later.', 'fast-trac' ); ?></h4>
+            <?php endif; ?>
           </div>
 
         </div>
