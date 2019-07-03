@@ -20,9 +20,9 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
 		 * If you're building a theme based on Fast Trac, use a find and replace
-		 * to change 'fasttrac' to the name of your theme in all the template files.
+		 * to change 'fast-trac' to the name of your theme in all the template files.
 		 */
-		load_theme_textdomain( 'fasttrac', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'fast-trac', get_template_directory() . '/languages' );
 
 
 
@@ -46,8 +46,8 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in one location and uses a secondary menu.
 		register_nav_menus( array(
-			'primary-menu' => esc_html__( 'Primary', 'fasttrac' ),
-			'secondary-menu' => esc_html__('Secondary', 'fasttrac'),
+			'primary-menu'      => esc_html__( 'Primary', 'fast-trac' ),
+			'secondary-menu'    => esc_html__('Secondary', 'fast-trac'),
 		) );
 
 		/*
@@ -63,24 +63,24 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 		) );
 
 		/**
-			* Enable support for Post Thumbnails on posts and pages.
-			*
-			* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-			*/
-			add_theme_support( 'post-thumbnails' );
+		* Enable support for Post Thumbnails on posts and pages.
+		*
+		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+		*/
+		add_theme_support( 'post-thumbnails' );
 
-			add_image_size( 'small', 320, 9999 );
-			add_image_size('small-square', 320, 320, true);
-			add_image_size( 'medium-square', 640, 640, true );
-			add_image_size( 'xlarge', 1200, 9999 );
-			add_image_size( 'xxl', 1600, 9999 );
-			add_image_size( 'huge', 2000, 9999 );
+		add_image_size( 'small', 320, 9999 );
+		add_image_size('small-square', 320, 320, true);
+		add_image_size( 'medium-square', 640, 640, true );
+		add_image_size( 'xlarge', 1200, 9999 );
+		add_image_size( 'xxl', 1600, 9999 );
+		add_image_size( 'huge', 2000, 9999 );
 
 
 		// Set up the WordPress core custom background feature.
 		add_theme_support( 'custom-background', apply_filters( 'fasttrac_custom_background_args', array(
-			'default-color' => 'ffffff',
-			'default-image' => '',
+			'default-color'     => 'ffffff',
+			'default-image'     => '',
 		) ) );
 
 		// Add theme support for selective refresh for widgets.
@@ -92,30 +92,30 @@ if ( ! function_exists( 'fasttrac_setup' ) ) :
 		 * @link https://codex.wordpress.org/Theme_Logo
 		 */
 		add_theme_support( 'custom-logo', array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
-			'flex-height' => true,
+			'height'        => 250,
+			'width'         => 250,
+			'flex-width'    => true,
+			'flex-height'   => true,
 		) );
 	}
 endif;
 add_action( 'after_setup_theme', 'fasttrac_setup' );
 
 /**
-	* Add image sizes to Media Dialog
-	*
-	*/
-	add_filter( 'image_size_names_choose', 'fasttrac_custom_sizes' );
+* Add image sizes to Media Dialog
+*
+*/
+add_filter( 'image_size_names_choose', 'fasttrac_custom_sizes' );
 
-	function fasttrac_custom_sizes( $sizes ) {
-		return array_merge( $sizes, array(
-			'small' => __('Small'),
-			'medium' => __('Medium'),
-			'large' => __('Large'),
-			'xlarge' => __('XLarge'),
+function fasttrac_custom_sizes( $sizes ) {
+	return array_merge( $sizes, array(
+		'small'     => __('Small', 'fast-trac'),
+		'medium'    => __('Medium', 'fast-trac'),
+		'large'     => __('Large', 'fast-trac'),
+		'xlarge'    => __('XLarge', 'fast-trac'),
 
-		));
-	}
+	));
+}
 
 /**
 * Disable default error login message
@@ -133,17 +133,37 @@ add_filter( 'login_errors', 'no_wordpress_errors' );
  }
  add_action('login_head', 'fasttrac_custom_login');
 
+/**
+ * Redirect Private Pages to Login
+ */
+add_action('template_redirect', 'private_content_redirect_to_login', 9);
+
+function private_content_redirect_to_login() {
+global $wp_query,$wpdb;
+
+    if (is_404()) {
+        $private = $wpdb->get_row($wp_query->request);
+        $location = wp_login_url($_SERVER["REQUEST_URI"]);
+
+        if( 'private' == $private->post_status  ) {
+            wp_safe_redirect($location);
+
+    exit;
+
+        }
+    }
+}
 
 /**
 * Change URL for Logo on Login Screen
 */
 function my_login_logo_url() {
-return get_bloginfo( 'url' );
+    return get_home_url();
 }
 add_filter( 'login_headerurl', 'my_login_logo_url' );
 
 function my_login_logo_url_title() {
-return 'Fast Trac';
+    return 'Fast Trac';
 }
 add_filter( 'login_headertitle', 'my_login_logo_url_title' );
 
@@ -152,28 +172,16 @@ add_filter( 'login_headertitle', 'my_login_logo_url_title' );
  *
  */
  if( function_exists('acf_add_options_page') ) {
- 	acf_add_options_page();
- }
-
- /**
- * Careers Custom Post Type
- * @link https://codex.wordpress.org/Post_Types
- */
- // function create_post_type() {
- //   register_post_type( 'careers',
- //     array(
- //       'labels' => array(
- //         'name' => __( 'Careers' ),
- //         'singular_name' => __( 'Career' )
- //       ),
- //       'public' => true,
- //       'has_archive' => true,
- //     )
- //   );
- // }
- // add_action( 'init', 'create_post_type' );
-
- add_action('admin_head', 'acf_table_styles');
+	
+	acf_add_options_page(array(
+		'page_title'    => 'Fast Trac Theme Settings',
+		'menu_title'	=> 'Fast Trac Theme Settings',
+		'menu_slug' 	=> 'fasttrac-theme-settings',
+		'capability'    => 'edit_posts',
+		'redirect'      => false
+	));
+	
+}
 
 function acf_table_styles() {
   echo '<style>
@@ -183,6 +191,13 @@ function acf_table_styles() {
     }
   </style>';
 }
+
+/**
+ * Add theme support for WP Job Manager
+ *
+ */
+add_theme_support( 'job-manager-templates' );
+
 
 
 /**
@@ -283,57 +298,62 @@ add_filter( 'embed_oembed_html', 'dcwd_youtube_wrapper', 10, 4 );
  */
 function fasttrac_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'fasttrac' ),
-		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'fasttrac' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'name'                      => esc_html__( 'Sidebar', 'fast-trac' ),
+		'id'                        => 'sidebar-1',
+		'description'               => esc_html__( 'Add widgets here.', 'fast-trac' ),
+		'before_widget'             => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'              => '</section>',
+		'before_title'              => '<h2 class="widget-title">',
+		'after_title'               => '</h2>',
 	) );
+
 	register_sidebar( array(
-		'name' 							=> esc_html__( 'Fast Points Footer Widget Links', 'fasttrac' ),
-		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
-		'id'								=> 'fastpoints-footer-widget-links',
-		'before_widget'			=> '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'			=> '</aside>',
-		'before_title'			=> '<h5>',
+		'name' 					    => esc_html__( 'Fast Points Footer Widget Links', 'fast-trac' ),
+		'description'			    => esc_html__( 'Appears in the main footer area.', 'fast-trac' ),
+		'id'					    => 'fastpoints-footer-widget-links',
+		'before_widget'			    => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'              => '</aside>',
+		'before_title'			    => '<h5>',
 		'after_title'				=> '</h5>',
 	) );
+
 	register_sidebar( array(
-		'name' 							=> esc_html__( 'Locations Footer Widget Links', 'fasttrac' ),
-		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
-		'id'								=> 'locations-footer-widget-links',
-		'before_widget'			=> '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'			=> '</aside>',
-		'before_title'			=> '<h5>',
+		'name' 						=> esc_html__( 'Locations Footer Widget Links', 'fast-trac' ),
+		'description'			    => esc_html__( 'Appears in the main footer area.', 'fast-trac' ),
+		'id'					    => 'locations-footer-widget-links',
+		'before_widget'			    => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'			    => '</aside>',
+		'before_title'			    => '<h5>',
 		'after_title'				=> '</h5>',
 	) );
+
 	register_sidebar( array(
-		'name' 							=> esc_html__( 'About Footer Widget Links', 'fasttrac' ),
-		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
-		'id'								=> 'about-footer-widget-links',
-		'before_widget'			=> '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'			=> '</aside>',
-		'before_title'			=> '<h5>',
+		'name' 						=> esc_html__( 'About Footer Widget Links', 'fast-trac' ),
+		'description'			    => esc_html__( 'Appears in the main footer area.', 'fast-trac' ),
+		'id'						=> 'about-footer-widget-links',
+		'before_widget'			    => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'			    => '</aside>',
+		'before_title'			    => '<h5>',
 		'after_title'				=> '</h5>',
 	) );
+
 	register_sidebar( array(
-		'name' 							=> esc_html__( 'Legal Footer Widget Links', 'fasttrac' ),
-		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
-		'id'								=> 'legal-footer-widget-links',
-		'before_widget'			=> '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'			=> '</aside>',
-		'before_title'			=> '<h5>',
+		'name' 						=> esc_html__( 'Legal Footer Widget Links', 'fast-trac' ),
+		'description'			    => esc_html__( 'Appears in the main footer area.', 'fast-trac' ),
+		'id'						=> 'legal-footer-widget-links',
+		'before_widget'			    => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'			    => '</aside>',
+		'before_title'			    => '<h5>',
 		'after_title'				=> '</h5>',
 	) );
+
 	register_sidebar( array(
-		'name' 							=> esc_html__( 'Store Locator Homepage Widget', 'fasttrac' ),
-		'description'			  => esc_html__( 'Appears in the main footer area.', 'fasttrac' ),
-		'id'								=> 'store-locator-homepage-widget',
-		'before_widget'			=> '<div="%1$s" class="widget %2$s wpsl-widget">',
-		'after_widget'			=> '</div>',
-		'before_title'			=> '<h5>',
+		'name' 						=> esc_html__( 'Store Locator Homepage Widget', 'fast-trac' ),
+		'description'			    => esc_html__( 'Appears in the main footer area.', 'fast-trac' ),
+		'id'						=> 'store-locator-homepage-widget',
+		'before_widget'			    => '<div="%1$s" class="widget %2$s wpsl-widget">',
+		'after_widget'			    => '</div>',
+		'before_title'			    => '<h5>',
 		'after_title'				=> '</h5>',
 	) );
 
@@ -345,25 +365,27 @@ add_action( 'widgets_init', 'fasttrac_widgets_init' );
  *
  *
  */
-function my_tinymce_styles( $init_array ) {
+add_filter( 'tiny_mce_before_init', function ( array $settings = [] ) {
 
-    $style_formats = array(
-        // These are the custom styles
-        array(
-            'title' => 'Underlined Heading',
-            'block' => 'h4',
-            'classes' => 'heading-underlined',
-            'wrapper' => false,
-        ),
-    );
-    // Insert the array, JSON ENCODED, into 'style_formats'
-    $init_array['style_formats'] = json_encode( $style_formats );
+    $formats = [];
+    if ( ! empty( $settings['style_formats'] ) && is_string( $settings['style_formats'] ) ) {
+        $formats = json_decode( $settings['style_formats'] );
+        if ( ! is_array( $formats ) ) {
+            $formats = [];
+        }
+    }
+    
+    $formats[] = [
+        'title'         => __( 'Underlined Heading', 'fast-trac' ),
+        'selector'      => 'h1,h2,h3,h4,h5,h6',
+        'classes'       => 'heading-underlined',
+        'wrapper'       => false,
+    ];
 
-    return $init_array;
+    $settings['style_formats'] = json_encode( $formats );
 
-}
-// Attach callback to 'tiny_mce_before_init'
-add_filter( 'tiny_mce_before_init', 'my_tinymce_styles' );
+    return $settings;
+} );
 
 /**
  * Enqueue scripts and styles.
@@ -373,15 +395,21 @@ function fasttrac_scripts() {
 
 	wp_enqueue_style( 'fasttrac-style', get_template_directory_uri() . '/css/app.css' );
 
+	wp_enqueue_script( 'fasttrac-wow', get_template_directory_uri() . '/js/wow.min.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'js-cookie', 'https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js', array('jquery'), '20151215', false );
+
+	wp_enqueue_script( 'fasttrac-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+
 	wp_enqueue_script( 'fasttrac-what-input', get_template_directory_uri() . '/js/what-input.min.js', array('jquery'), '20151215', true );
 
 	wp_enqueue_script( 'fasttrac-foundation', get_template_directory_uri() . '/js/foundation.min.js', array('jquery'), '20151215', true );
 
-	wp_enqueue_script( 'fasttrac-wow', get_template_directory_uri() . '/js/wow.min.js', array(), '20151215', true );
-
 	wp_enqueue_script( 'fasttrac-app-js', get_template_directory_uri() . '/js/app.js', array('jquery'), '20151215', true );
 
-	wp_enqueue_script( 'fasttrac-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	if( is_front_page() ){
+		wp_enqueue_script( 'fasttrac-functions-js', get_template_directory_uri() . '/js/homescripts.js', array(), '20151215', true );
+	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
