@@ -4,7 +4,8 @@
   "description": "Package to enable BroswerSync on PHP changes in WordPress local environment.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "npm start"
+    "start": "gulp",
+    "build": "gulp sass"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
@@ -28,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/aadfco/fasttrac-wp/issues"
   },
-  "homepage": "https://github.com/aadfco/fasttrac-wp#readme"
+  "homepage": "https://github.com/aadfco/fasttrac-wp#readme",
+  "dependencies": {
+    "natives": "^1.1.6"
+  }
 }

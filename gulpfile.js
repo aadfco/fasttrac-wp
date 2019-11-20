@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var $    = require('gulp-load-plugins')();
 var browserSync = require('browser-sync').create();
-var reload = browserSync.reload
 
 var sassPaths = [
   'node_modules/foundation-sites/scss',
@@ -33,8 +32,13 @@ gulp.task('default', ['sass'], function() {
 
   browserSync.init({
     notify: false,
-    proxy: 'localhost:8888/fasttrac-wp',
-    port: 8181
+	open: 'external',
+    host: 'fasttrac-live.test',
+	proxy: 'https://fasttrac-live.test',
+	https: {
+		key: "/Users/aadf82/Sites/SSL/fasttrac-live.test.key",
+        cert: "/Users/aadf82/Sites/SSL/fasttrac-live.test.crt"
+	}
   });
 
   //gulp.watch(['scss/**/*.scss'], ['sass']);
