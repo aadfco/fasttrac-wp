@@ -393,7 +393,7 @@ add_filter( 'tiny_mce_before_init', function ( array $settings = [] ) {
 function fasttrac_scripts() {
   wp_dequeue_style( 'wpsl-styles' );
 
-	wp_enqueue_style( 'fasttrac-style', get_template_directory_uri() . '/css/app.css' );
+	wp_enqueue_style( 'fasttrac-style', get_template_directory_uri() . '/css/app.css', array(), '2.0'  );
 
 	wp_enqueue_script( 'fasttrac-wow', get_template_directory_uri() . '/js/wow.min.js', array(), '20151215', true );
 
@@ -408,7 +408,7 @@ function fasttrac_scripts() {
 	wp_enqueue_script( 'fasttrac-app-js', get_template_directory_uri() . '/js/app.js', array('jquery'), '20151215', true );
 
 	if( is_front_page() ){
-		wp_enqueue_script( 'fasttrac-functions-js', get_template_directory_uri() . '/js/homescripts.js', array(), '20151215', true );
+		wp_enqueue_script( 'fasttrac-functions-js', get_template_directory_uri() . '/js/homescripts.js', array(), '2.0', true );
 	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
