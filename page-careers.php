@@ -2,9 +2,9 @@
 $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'xlarge' );
 ?>
 
-<div class="page-hero" style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
+<div class="page-hero" style="background-color: #e31b23; background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0,0.3)), url('<?php echo $featuredImg[0]; ?>');">
   <div class="page-hero-content centered">
-    <h1 class="standard-shadow">Careers</h1>
+    <h1 class="superhero">Careers</h1>
     <p class="subheader">Join the Fast Trac Team!</p>
   </div>
 </div>

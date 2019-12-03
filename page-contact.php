@@ -21,11 +21,11 @@ $map_embed = get_field('map_embed');
 $form_embed = get_field('contact_form_embed');
 ?>
 
-<div class="page-hero" style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
+<div class="page-hero" style="background-color: #e31b23; background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0,0.3)), url('<?php echo $featuredImg[0]; ?>');">
 
   <div class="page-hero-content centered">
 
-    <h1 class="standard-shadow"><?php the_title( __( '', 'fast-trac' ) ); ?></h1>
+    <h1 class="superhero"><?php the_title( __( '', 'fast-trac' ) ); ?></h1>
     
   </div><!-- end page-hero-content -->
 

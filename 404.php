@@ -10,7 +10,7 @@
 get_header();
 ?>
 
-<div class="page-hero" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/404.jpg'); background-position: bottom;">
+<div class="page-hero" style="background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0,0.3)), url('<?php echo get_template_directory_uri(); ?>/img/404.jpg'); background-position: bottom;">
   <div class="page-hero-content centered page-not-found">
     <h1 class="superhero">404</h1>
     <p class="subheader"><?php esc_html_e( "Looks like we've used up all the fuel!", 'fast-trac' ); ?></p>

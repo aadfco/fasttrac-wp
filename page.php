@@ -19,9 +19,9 @@ get_header();
 $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'xxl' );
 ?>
 
-<div class="page-hero" style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
+<div class="page-hero" style="background-color: #e31b23; background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0,0.3)), url('<?php echo $featuredImg[0]; ?>');">
   <div class="page-hero-content centered">
-    <h1 class="standard-shadow"><?php the_title( __( '', 'fast-trac' ) ); ?></h1>
+    <h1 class="superhero"><?php the_title( __( '', 'fast-trac' ) ); ?></h1>
     <!-- <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
   </div>
 </div>

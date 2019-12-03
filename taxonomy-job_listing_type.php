@@ -19,9 +19,9 @@ $cat_color = get_field('job_cat_color', $term);
 $cat_sub = get_field('category_subheading', $term);
 ?>
 
-	<div class="page-hero" style="background-color: <?php echo $cat_color; ?>; background-image: url('<?php echo $cat_image_array[0]; ?>');">
+	<div class="page-hero" style="background-color: <?php echo $cat_color; ?>; background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0,0.3)), url('<?php echo $cat_image_array[0]; ?>');">
 		<div class="page-hero-content centered">
-			<h1 class="standard-shadow"><?php single_cat_title( __( '', 'fast-trac' ) ); ?></h1>
+			<h1 class="superhero"><?php single_cat_title( __( '', 'fast-trac' ) ); ?></h1>
 			<p class="subheader">Listings</p>
 		</div>
 	</div>

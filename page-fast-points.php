@@ -5,55 +5,78 @@ $featuredImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'x
 $post_date = get_the_date( 'F d, Y' );
 $subhead = get_field('subheader');
 $hte_header = get_field('how_to_earn_header');
+$fp_promo_header = get_field('fp_promo_header');
+$fp_promo_content = get_field('fp_promo_content');
+$fp_promo_img = get_field('fp_promo_image');
+$fp_promo_img_size = 'full';
 ?>
 
-	<div class="page-hero" style="background-color: #e31b23; background-image: url('<?php echo $featuredImg[0]; ?>');">
+	<div class="page-hero" style="background-color: #e31b23; background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0,0.3)), url('<?php echo $featuredImg[0]; ?>');">
 		<div class="page-hero-content centered">
-			<h1 class="standard-shadow"><?php the_title( __( '', 'fast-trac' ) ); ?></h1>
+			<h1 class="superhero"><?php the_title( __( '', 'fast-trac' ) ); ?></h1>
             <p class="subheader"><?php echo $subhead; ?></p>
 		</div>
 	</div>
 
-  <section class="how-to-earn">
-    <div class="container">
-        <div class="inner-row">
-
-            <div class="section-title">
-                <h1 class="superhero"><?php echo $hte_header; ?></h1>
+    <section class="fp-promo">
+        <div class="container">
+            <div class="inner-row">
+                <div class="section-title">
+                    <h1 class="superhero"><?php echo $fp_promo_header; ?></h1>
+                </div>
             </div>
+            <div class="inner-row">
+				<div class="fp-promo-img-wrap">
+					<?php echo wp_get_attachment_image($fp_promo_img, $fp_promo_img_size); ?>
+				</div>
+				<div class="cell small-12">
+					<?php echo $fp_promo_content; ?>
+				</div>
+			</div>
 
         </div>
+    </section> <!-- Fast Points Promo -->
 
-        <div class="card-wrapper">
-            <div class="grid-x grid-padding-x small-up-1 large-up-3">
-                <?php if( have_rows('how_to_earn_cards') ): ?>
-                <?php while( have_rows('how_to_earn_cards') ): the_row();
-                // ACF Repeater Variables
-                $icon = get_sub_field('icon');
-                $header = get_sub_field('header');
-                $p = get_sub_field('paragraph');
-                ?>
-                <div class="cell">
-                    <div class="card">
-                        <div class="card-icon-circle">
-                            <div class="card-icon">
-                                <i class="<?php echo $icon; ?>"></i>
+    <section class="how-to-earn">
+        <div class="container">
+            <div class="inner-row">
+
+                <div class="section-title">
+                    <h1 class="superhero"><?php echo $hte_header; ?></h1>
+                </div>
+
+            </div>
+
+            <div class="card-wrapper">
+                <div class="grid-x grid-padding-x small-up-1 large-up-3">
+                    <?php if( have_rows('how_to_earn_cards') ): ?>
+                    <?php while( have_rows('how_to_earn_cards') ): the_row();
+                    // ACF Repeater Variables
+                    $icon = get_sub_field('icon');
+                    $header = get_sub_field('header');
+                    $p = get_sub_field('paragraph');
+                    ?>
+                    <div class="cell">
+                        <div class="card">
+                            <div class="card-icon-circle">
+                                <div class="card-icon">
+                                    <i class="<?php echo $icon; ?>"></i>
+                                </div>
+                            </div>
+                            <div class="card-section">
+                                <h4><?php echo $header; ?></h4>
+                                <p><?php echo $p; ?></p>
                             </div>
                         </div>
-                        <div class="card-section">
-                            <h4><?php echo $header; ?></h4>
-                            <p><?php echo $p; ?></p>
-                        </div>
                     </div>
+                    <?php
+                    endwhile;
+                    endif;
+                    ?>
                 </div>
-                <?php
-                endwhile;
-                endif;
-                ?>
             </div>
         </div>
-    </div>
-</section> <!-- end how-to-earn -->
+    </section> <!-- end how-to-earn -->
 
 <section class="in-store-fast-points">
     <div class="container">
