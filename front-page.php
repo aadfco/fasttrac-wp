@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<?php get_template_part( 'template-parts/orbit', 'slider'); ?>
+<?php get_template_part( 'template-parts/promo', 'blocks'); ?>
 
 <!-- Fast Points -->
 <?php
